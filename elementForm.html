@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Element Form</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<h1>Add an Element</h1>
+	<form action="addelement" method="post">
+	<!-- <form action="server.py" method="post"> -->
+		<label for="element_number">Element Number:</label>
+		<input type="text" id="element_number" name="element_number"><br>
+
+		<label for="element_name">Element Name:</label>
+		<input type="text" id="element_name" name="element_name"><br>
+
+		<label for="element_code">Element Code:</label>
+		<input type="text" id="element_code" name="element_code"><br>
+
+		<label for="color1">Color 1:</label>
+		<input type="color" id="color1" name="color1"><br>
+
+		<label for="color2">Color 2:</label>
+		<input type="color" id="color2" name="color2"><br>
+
+		<label for="color3">Color 3:</label>
+		<input type="color" id="color3" name="color3"><br>
+
+		<label for="radius">Radius:</label>
+		<input type="range" id="radius" name="radius" min="0" max="50"><br>
+
+		<input type="submit" value="Submit">
+	</form>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<h1>Remove an Element</h1>
+	<form action="removeelement" method="post">
+			<label for="element_number">Element Number:</label>
+			<input type="text" id="element_number" name="element_number"><br>
+			<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
