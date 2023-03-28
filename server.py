@@ -10,44 +10,60 @@ from urllib.parse import parse_qs
 from http.server import HTTPServer, BaseHTTPRequestHandler;
 
 class MyHandler( BaseHTTPRequestHandler ):
+    file_paths = {
+        '/home.html': ('text/html', 'home.html'),
+        '/jquery.js': ('application/javascript', 'jquery.js'),
+        '/styles.css': ('text/css', 'styles.css'),
+        '/elementForm.html': ('text/html', 'elementForm.html'),
+        '/uploadSdf.html': ('text/html', 'uploadSdf.html'),
+
+        '/template/home.html': ('text/html', 'template/home.html'),
+        '/template/modifyElements.html': ('text/html', 'template/modifyElements.html'),
+        '/template/uploadSDF.html': ('text/html', 'template/uploadSDF.html'),
+
+        '/template/css/all.min.css': ('text/css', 'template/css/all.min.css'),
+        '/template/css/bootstrap.min.css': ('text/css', 'template/css/bootstrap.min.css'),
+        '/template/css/templatemo-new-vision.css': ('text/css', 'template/css/templatemo-new-vision.css'),
+        '/template/slick/slick-theme.css': ('text/css', 'template/slick/slick-theme.css'),
+        '/template/slick/slick.css': ('text/css', 'template/slick/slick.css'),
+
+        '/template/slick/slick.min.js': ('application/javascript', 'template/slick/slick.min.js'),
+        '/template/js/bootstrap.min.js': ('application/javascript', 'template/js/bootstrap.min.js'),
+        '/template/js/jquery-3.4.1.min.js': ('application/javascript', 'template/js/jquery-3.4.1.min.js'),
+        '/template/js/templatemo-script.js': ('application/javascript', 'template/js/templatemo-script.js'),
+
+        '/template/img/home_background2.jpg': ('image/jpeg', 'template//img/home_background2.jpg'),
+        '/template/img/modifyElementImage.jpg': ('image/jpeg', 'template//img/modifyElementImage.jpg'),
+        '/template/img/home_background.jpg': ('image/jpeg', 'template//img/home_background.jpg'),
+        '/template/img/203183.png': ('image/png', 'template/img/203183.png'),
+        '/template/img/68084.png': ('image/png', 'template/img/68084.png'),
+        '/template/img/126477.png': ('image/png', 'template/img/126477.png'),
+        '/template/img/4084223-200.png': ('image/png', 'template/img/4084223-200.png'),
+        '/template/img/4649486-200.png': ('image/png', 'template/img/4649486-200.png')
+
+    }
+
     def do_GET(self):
-        if self.path == '/home.html':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            with open('home.html', 'rb') as f:
-                self.wfile.write(f.read())
-        elif self.path == '/jquery.js':
-            self.send_response(200)
-            self.send_header('Content-type', 'application/javascript')
-            self.end_headers()
-            with open('jquery.js', 'rb') as f:
-                self.wfile.write(f.read())
-        elif self.path == '/styles.css':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/css')
-            self.end_headers()
-            with open('styles.css', 'rb') as f:
-                self.wfile.write(f.read())
-        elif self.path == '/elementForm.html':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            with open('elementForm.html', 'rb') as f:
-                self.wfile.write(f.read())
-        elif self.path == '/uploadSdf.html':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            with open('uploadSdf.html', 'rb') as f:
-                self.wfile.write(f.read())
+        if self.path in self.file_paths:
+            content_type, filename = self.file_paths[self.path]
+            try:
+                self.send_response(200)
+                self.send_header('Content-type', content_type)
+                self.end_headers()
+                with open(filename, 'rb') as f:
+                    self.wfile.write(f.read())
+            except IOError:
+                self.send_error(500, 'Internal Server Error - Cannot open file')
+                self.send_header('Content-type', 'text/html')
+                self.end_headers()
+                self.wfile.write('<script>alert("Cannot open file");</script>'.encode('utf-8'))
         else:
             self.send_response( 404 );
             self.end_headers();
             self.wfile.write( bytes( "404: not found", "utf-8" ) );
 
     def do_POST(self):
-        if self.path == "/addelement":
+        if self.path == "/template/addelement":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             print("body")
@@ -71,9 +87,9 @@ class MyHandler( BaseHTTPRequestHandler ):
             self.send_response(200)
             self.send_header("Content-type", "text/plain")
             self.end_headers()
-            self.wfile.write(bytes("Form data received", "utf-8"))
+            self.wfile.write(bytes("<h3>Success</h3>", "utf-8"))
 
-        elif self.path == "/removeelement":
+        elif self.path == "/template/removeelement":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             data = parse_qs(body.decode())
@@ -90,20 +106,19 @@ class MyHandler( BaseHTTPRequestHandler ):
             db.conn.close()
 
             self.send_response(200)
-            self.send_header("Content-type", "text/plain")
+            self.send_header("Content-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes("Element removed successfully", "utf-8"))
+            success_message = "<html><body><h1>Success!</h1><a href='/template/modifyElements.html'>Back</a></body></html>"
+            self.wfile.write(success_message.encode())
 
-        elif self.path == "/molecule":
+
+
+        elif self.path == "/template/molecule":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             fp = body.decode()
             split_string = fp.split('\n')
-            print(split_string)
             new_string = '\n'.join(split_string[4:])
-            self.send_response(200)
-            self.send_header("Content-type", "image/svg+xml")
-            self.end_headers()
 
             db = molsql.Database(reset=False)
             db.create_tables(); 
@@ -129,7 +144,10 @@ class MyHandler( BaseHTTPRequestHandler ):
             mol = db.load_mol( filename )
             mol.sort()
             svg_string = mol.svg()
-            self.wfile.write(bytes(filename + " uploaded successfully", "utf-8"))
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            # self.wfile.write(bytes("uploaded successfully", "utf-8"))
             # self.wfile.write(svg_string.encode())
         else:
             self.send_error(404, "File not founddd")

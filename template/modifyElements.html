@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Modify Elements</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet" /> <!-- https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans -->
+    <link href="css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+    <link href="slick/slick.css" rel="stylesheet" /> <!-- https://kenwheeler.github.io/slick/ -->
+    <link href="slick/slick-theme.css" rel="stylesheet" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" /> <!-- https://getbootstrap.com -->
+	<link href="css/templatemo-new-vision.css" rel="stylesheet" />
+<!--
+
+New Vision Template
+
+https://templatemo.com/tm-542-new-vision
+
+-->
+
+</head>
+<body>
+    <!-- Page Header -->
+    <div class="container-fluid">
+        <div class="tm-site-header">
+            <div class="row">
+                <div class="col-12 tm-site-header-col">
+                    <div class="tm-site-header-left">
+                        <img src="/template/img/203183.png" alt="Molecule Image" class="tm-site-icon">
+                        <h1 class="tm-site-name">Molecule<br>Explorer</h1>
+                    </div>
+                    <div class="tm-site-header-right tm-menu-container-outer">
+                        
+                        <!--Navbar-->
+                        <nav class="navbar navbar-expand-lg">
+                        
+                          <!-- Collapse button -->
+                          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+                            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+                                class="fas fa-bars fa-1x"></i></span></button>
+                        
+                          <!-- Collapsible content -->
+                          <div class="collapse navbar-collapse tm-nav" id="navbarSupportedContent1">
+                        
+                            <!-- Links -->
+                            <ul class="navbar-nav mr-auto">
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                              </li>
+                              <li class="nav-item active">
+                                <a class="nav-link tm-nav-link" href="#">Modify Elements</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="uploadSDF.html">Upload SDF</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="contact.html">View Molecules</a>
+                              </li>
+                            </ul>
+                            <!-- Links -->
+                        
+                          </div>
+                          <!-- Collapsible content -->
+                        
+                        </nav>
+                        <!--/.Navbar-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="tm-main-bg tm-about-bg"></div>        
+            </div>
+        </div>
+        
+        <!-- Main -->
+        <main>
+            <!-- Welcome section -->
+            <section class="tm-add-remove-element">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2 class="tm-section-header tm-header-floating" onclick="toggleAddForm()" >Add an Element</h2>                            
+                            <div class="row" id="add-form" style="display:none;">
+                                <div class="col-lg-12">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <form action="addelement" method="post">
+                                        <div class="form-group">
+                                            <label for="element_number">Element Number:</label>
+                                            <input type="text" class="form-control" id="add_element_number" name="element_number" required onblur="checkInput('add_element_number')">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="element_name">Element Name:</label>
+                                            <input type="text" class="form-control" id="element_name" name="element_name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="element_code">Element Code:</label>
+                                            <input type="text" class="form-control" id="element_code" name="element_code" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="color1">Color 1:</label>
+                                            <input type="color" class="form-control" id="color1" name="color1" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="color2">Color 2:</label>
+                                            <input type="color" class="form-control" id="color2" name="color2" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="color3">Color 3:</label>
+                                            <input type="color" class="form-control" id="color3" name="color3" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="radius">Radius:</label>
+                                            <input type="range" class="form-control-range" id="radius" name="radius" min="0" max="50" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        </div>
+                                    </form>
+                                    <div id="success-message" style="display:none;">Success</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 class="tm-section-header tm-header-floating" onclick="toggleRemoveForm()">Remove an Element</h2>
+                            <div class="row" id="remove-form" style="display:none;">
+                              <div class="col-lg-12">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <form id="remove-form">
+                                  <div class="form-group">
+                                    <label for="element_number">Element Number:</label>
+                                    <input type="text" class="form-control" id="remove_element_number" name="element_number" required onblur="checkInput('remove_element_number')" />
+                                  </div>
+                                  <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                  </div>
+                                </form>
+                                <div id="success-message" style="display:none;">Success</div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </section>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+            <footer>
+                Copyright &copy; 2020 New Vision 
+                
+                - Design: <a href="https://templatemo.com" rel="sponsored" target="_parent" title="css templates">TemplateMo</a>
+            </footer>
+            
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+    </script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+</body>
+</html>
