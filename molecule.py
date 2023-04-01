@@ -258,6 +258,15 @@ class molecule(_object):
 
     def sort(self):
         return _molecule.molecule_sort(self)
+
+    def rotateX(self, x):
+        return _molecule.molecule_rotateX(self, x)
+
+    def rotateY(self, y):
+        return _molecule.molecule_rotateY(self, y)
+
+    def rotateZ(self, z):
+        return _molecule.molecule_rotateZ(self, z)
 molecule_swigregister = _molecule.molecule_swigregister
 molecule_swigregister(molecule)
 

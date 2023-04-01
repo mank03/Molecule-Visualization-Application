@@ -268,6 +268,12 @@ void molsort( molecule *molecule ){
 void xrotation(xform_matrix xform_matrix, unsigned short deg) {
     double rad = deg * (PI / 180.0);
 
+    printf("\n\nX ROTATION BEFORE:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
     xform_matrix[0][0] = 1.0;
     xform_matrix[0][1] = 0.0;
     xform_matrix[0][2] = 0.0;
@@ -279,6 +285,12 @@ void xrotation(xform_matrix xform_matrix, unsigned short deg) {
     xform_matrix[2][0] = 0.0;
     xform_matrix[2][1] = sin(rad);
     xform_matrix[2][2] = cos(rad);
+    printf("\n\nX ROTATION AFTER:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
 }
 
 /**
@@ -289,6 +301,13 @@ void xrotation(xform_matrix xform_matrix, unsigned short deg) {
  */
 void yrotation(xform_matrix xform_matrix, unsigned short deg) {
     double rad = deg * (PI / 180.0);
+
+    printf("\n\nY ROTATION BEFORE:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
 
     xform_matrix[0][0] = cos(rad);
     xform_matrix[0][1] = 0.0;
@@ -301,6 +320,13 @@ void yrotation(xform_matrix xform_matrix, unsigned short deg) {
     xform_matrix[2][0] = -sin(rad);
     xform_matrix[2][1] = 0.0;
     xform_matrix[2][2] = cos(rad);
+    printf("\n\nY ROTATION AFTER:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
+
 }
 
 /**
@@ -310,7 +336,16 @@ void yrotation(xform_matrix xform_matrix, unsigned short deg) {
  * @param deg The degree of rotation.
  */
 void zrotation(xform_matrix xform_matrix, unsigned short deg) {
+    
+    printf("\n\nZ ROTATION BEFORE:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
+    
     double rad = deg * (PI / 180.0);
+    
 
     xform_matrix[0][0] = cos(rad);
     xform_matrix[0][1] = -sin(rad);
@@ -323,6 +358,13 @@ void zrotation(xform_matrix xform_matrix, unsigned short deg) {
     xform_matrix[2][0] = 0.0;
     xform_matrix[2][1] = 0.0;
     xform_matrix[2][2] = 1.0;
+    
+    printf("\n\nZ ROTATION AFTER:\n");
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf("xform_matrix[%d][%d] = %f\n", i , j, xform_matrix[i][j]);
+        }
+    }
 }
 
 /**
@@ -337,12 +379,6 @@ void mol_xform(molecule *molecule, xform_matrix matrix) {
   double transform[3];
 
   bond *bonds;
-
-  for(int i = 0; i < molecule -> bond_no; i++){
-      bonds = &molecule -> bonds[i];
-      compute_coords(bonds);
-  }
-
 
   for(int i = 0; i < molecule -> atom_no; i++){
     x = 0;
@@ -365,4 +401,10 @@ void mol_xform(molecule *molecule, xform_matrix matrix) {
     molecule -> atom_ptrs[i]->y = rotate[1];
     molecule -> atom_ptrs[i]->z = rotate[2];
   }
+
+    for(int i = 0; i < molecule -> bond_no; i++){
+      bonds = &molecule -> bonds[i];
+      compute_coords(bonds);
+  }
+
 }

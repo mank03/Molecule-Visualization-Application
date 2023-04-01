@@ -54,7 +54,7 @@ https://templatemo.com/tm-542-new-vision
                                 <a class="nav-link tm-nav-link" href="#">Upload SDF</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link tm-nav-link" href="contact.html">View Molecules</a>
+                                <a class="nav-link tm-nav-link" href="viewMolecules.html">View Molecules</a>
                               </li>
                             </ul>
                             <!-- Links -->
@@ -85,37 +85,35 @@ https://templatemo.com/tm-542-new-vision
             <section class="tm-welcome">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="tm-section-header tm-header-floating">Upload SDF File</h2>
+                        <h2 class="tm-section-header tm-header-floating">Upload SDF</h2>
                     </div>
                 </div>
-            
             <br/>
             <br/>
             <br/>
             <br/>
             <section class="upload-sdf">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-6 mx-auto">
-                            <form action="molecule" enctype="multipart/form-data" method="post">
-                                <div class="form-group">
-                                    <label for="sdf_file" class="font-weight-bold">Choose your SDF file:</label>
-                                    <input type="file" id="sdf_file" name="filename" class="form-control-file">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Upload</button>
-                                </div>
-                            </form>
+                  <div class="row">
+                    <div class="col-12 col-md-6 mx-auto">
+                      <form id="upload-form" action="molecule" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                          <label for="sdf_file" class="font-weight-bold">Choose your SDF here:</label>
+                          <input type="file" id="sdf_file" name="filename" class="form-control-file">
                         </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                        </div>
+                      </form>
                     </div>
+                    <div id="success-message" style="display:none;">Success</div>
+                  </div>
                 </div>
-            </section>
-
-            <footer>
-                Copyright &copy; 2020 New Vision 
-                
-                - Design: <a href="https://templatemo.com" rel="sponsored" target="_parent" title="css templates">TemplateMo</a>
-            </footer>
+              </section>
+            
+              <footer>
+                Copyright &copy; 2023 Manu Konnur - All rights reserved.
+             </footer>
             
         </main>
     </div>

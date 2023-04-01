@@ -40,6 +40,11 @@ h1, h2, h3 {
     font-weight: 400;
 }
 
+h4{
+    color: #ffffff;
+    font-weight: 200;
+}
+
 p {
     color: #373f4f;
     line-height: 1.9;
@@ -108,14 +113,11 @@ p {
     margin-right: -40px;
 }
 
-.tm-about-bg { 
-    background-image: url(../img/modifyElementImage.jpg); 
-    height: 800px;
+.tm-about-bg {  background-image: url(../img/elementpic1.jpg); }
+.tm-aboutPage-bg { background-image: url(../img/Xm19kO.jpg); }
 
-}
-
-.tm-services-bg { background-image: url(../img/home_background.jpg); }
-.tm-contact-bg { background-image: url(../img/new-vision-04.jpg); }
+.tm-services-bg { background-image: url(../img/molpic4.jpg); }
+.tm-contact-bg { background-image: url(../img/molpic5.jpg); }
 
 @media (max-width: 992px) {
     .tm-contact-bg { background-position: 80% top; }
@@ -575,23 +577,28 @@ figure.effect-honey:hover h4 i {
   transform: translate3d(0, 0, 0);
 }
 
-/* Our Company */
-.tm-about { max-width: 975px; }
+
+.tm-about {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .tm-about { max-width: 510px; }
+}
+
+.tm-about-img {
+    max-width: 240px;
+    margin: 0 auto 40px;
+}
 
 .tm-about-icon {
     color: #09F;
     min-width: 235px;
     display: flex;
     justify-content: center;
-}
-
-@media (max-width: 600px) {
-    .tm-about-icon {
-        padding-bottom: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        min-width: 160px;
-    }
 }
 
 .tm-about-1 {
@@ -690,6 +697,22 @@ figure.effect-zoe:hover p.icon-links a:nth-child(2) {
 figure.effect-zoe:hover p.icon-links a:first-child {
 	-webkit-transition-delay: 0.2s;
 	transition-delay: 0.2s;
+}
+
+.tm-aboutPage {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .tm-aboutPage { max-width: 510px; }
+}
+
+.tm-aboutPage-img {
+    max-width: 240px;
+    margin: 0 auto 40px;
 }
 
 .tm-services {

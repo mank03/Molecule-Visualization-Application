@@ -83,6 +83,27 @@ class Database:
         
         # Commit the changes
         self.conn.commit()
+    
+    def delete_atom(self, molname, atom):
+        # Insert the atom attributes into the Atoms table
+        self.conn.execute("""
+            DELETE FROM Atoms
+            WHERE ELEMENT_CODE = ?
+        """, 
+        (atom.element,)
+        )
+        
+        # Get the ID of the newly inserted atom
+        atom_id = self.conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+        
+        # Delete the molecule-atom relationship from the MoleculeAtom table
+        self.conn.execute("""
+            DELETE FROM MoleculeAtom WHERE MOLECULE_ID=(SELECT MOLECULE_ID FROM Molecules WHERE NAME=?) AND ATOM_ID=?
+        """, (molname, atom_id))
+
+        # Commit the changes
+        self.conn.commit()
+    
 
     def add_bond(self, molname, bond):
         # Insert the atom attributes into the Bonds table
@@ -105,9 +126,19 @@ class Database:
         # Commit the changes
         self.conn.commit()
 
+    def helper(self,name):
+        # Insert the molecule name into the Molecules table
+        self.conn.execute("""
+            INSERT OR IGNORE
+            INTO Molecules (NAME) 
+            VALUES (?)""",
+            (name,)
+        )
+
     def add_molecule(self, name, fp):
         mol = MolDisplay.Molecule()
         mol.parse(fp)
+
 
         # Insert the molecule name into the Molecules table
         self.conn.execute("""
@@ -131,6 +162,52 @@ class Database:
         # Commit the changes
         self.conn.commit()
     
+    def delete_molecule(self, name):
+        # Retrieve the molecule ID for the given name
+        mol_id = self.conn.execute("""
+            SELECT MOLECULE_ID FROM Molecules
+            WHERE NAME = ?""",
+            (name,)
+        ).fetchone()
+
+        if mol_id is None:
+            # If the molecule doesn't exist, return None
+            return None
+
+        self.conn.execute("""
+            DELETE FROM MoleculeAtom 
+            WHERE MOLECULE_ID = ?""",
+            mol_id
+        )
+
+        self.conn.execute("""
+            DELETE FROM MoleculeBond 
+            WHERE MOLECULE_ID = ?""",
+            mol_id
+        )
+
+        self.conn.execute("""
+            DELETE FROM Molecules 
+            WHERE NAME = ?""",
+            (name,)
+        )
+
+        self.conn.execute("""
+            DELETE FROM Atoms
+            WHERE ATOM_ID NOT IN (
+                SELECT ATOM_ID FROM MoleculeAtom
+            )
+        """)
+        
+        self.conn.execute("""
+            DELETE FROM Bonds
+            WHERE BOND_ID NOT IN (
+                SELECT BOND_ID FROM MoleculeBond
+            )
+        """)
+        # Commit the changes
+        self.conn.commit()
+
     def load_mol( self, name ):
         mol = MolDisplay.Molecule()
         # Retrieve the molecule ID for the given name

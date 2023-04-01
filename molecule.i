@@ -79,6 +79,33 @@
   {
     molsort( $self );
   }
+
+  void rotateX(double x) {
+    xform_matrix matrix;
+
+    xrotation(matrix, x);
+    mol_xform($self, matrix);
+  }
+  
+  void rotateY(double y) {
+    xform_matrix matrix;
+
+    yrotation(matrix, y);
+    mol_xform($self, matrix);
+  }
+    
+  void rotateZ(double z) {
+    xform_matrix matrix;
+
+    zrotation(matrix, z);
+    mol_xform($self, matrix);
+  }
+
 };
+
+
+
+
+
 
 

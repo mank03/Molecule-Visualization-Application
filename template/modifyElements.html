@@ -56,7 +56,7 @@ https://templatemo.com/tm-542-new-vision
                                 <a class="nav-link tm-nav-link" href="uploadSDF.html">Upload SDF</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link tm-nav-link" href="contact.html">View Molecules</a>
+                                <a class="nav-link tm-nav-link" href="viewMolecules.html">View Molecules</a>
                               </li>
                             </ul>
                             <!-- Links -->
@@ -72,10 +72,14 @@ https://templatemo.com/tm-542-new-vision
         </div>
         
         <div class="row">
-            <div class="col-12">
-                <div class="tm-main-bg tm-about-bg"></div>        
-            </div>
-        </div>
+          <div class="col-12">
+              <div class="tm-main-bg tm-about-bg">
+                  <div 
+                      class ="tm-about-img">
+                  </div>
+              </div>  
+          </div>
+      </div>
         
         <!-- Main -->
         <main>
@@ -94,15 +98,15 @@ https://templatemo.com/tm-542-new-vision
                                     <form action="addelement" method="post">
                                         <div class="form-group">
                                             <label for="element_number">Element Number:</label>
-                                            <input type="text" class="form-control" id="add_element_number" name="element_number" required onblur="checkInput('add_element_number')">
+                                            <input type="number" class="form-control" id="add_element_number" name="element_number" required onblur="checkInput('add_element_number')">
                                         </div>
                                         <div class="form-group">
                                             <label for="element_name">Element Name:</label>
-                                            <input type="text" class="form-control" id="element_name" name="element_name" required>
+                                            <input type="text" class="form-control" id="element_name" name="element_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="element_code">Element Code:</label>
-                                            <input type="text" class="form-control" id="element_code" name="element_code" required>
+                                            <input type="text" class="form-control" id="element_code" name="element_code" required onblur="checkNameInput('element_code')">
                                         </div>
                                         <div class="form-group">
                                             <label for="color1">Color 1:</label>
@@ -118,51 +122,98 @@ https://templatemo.com/tm-542-new-vision
                                         </div>
                                         <div class="form-group">
                                             <label for="radius">Radius:</label>
-                                            <input type="range" class="form-control-range" id="radius" name="radius" min="0" max="50" required>
+                                            <input type="number" class="form-control" id="radius" name="radius" required onblur="checkInput('radius')">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                                         </div>
                                     </form>
-                                    <div id="success-message" style="display:none;">Success</div>
+                                    <h4 id="success-message" style="display:none;">Success</h4> 
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h2 class="tm-section-header tm-header-floating" onclick="toggleRemoveForm()">Remove an Element</h2>
-                            <div class="row" id="remove-form" style="display:none;">
-                              <div class="col-lg-12">
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <form id="remove-form">
-                                  <div class="form-group">
-                                    <label for="element_number">Element Number:</label>
-                                    <input type="text" class="form-control" id="remove_element_number" name="element_number" required onblur="checkInput('remove_element_number')" />
-                                  </div>
-                                  <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                                  </div>
-                                </form>
-                                <div id="success-message" style="display:none;">Success</div>
-                              </div>
+                          <h2 class="tm-section-header tm-header-floating" onclick="toggleRemoveForm()">Remove an Element</h2>
+                          <div class="row" id="remove-form" style="display:none;">
+                            <div class="col-lg-12">
+                              <br />
+                              <br />
+                              <br />
+                              <br />
+                              <form id="remove-form">
+                                <div class="form-group">
+                                  <label for="element_number">Element Number:</label>
+                                  <input type="text" class="form-control" id="remove_element_number" name="element_number" required onblur="checkInput('remove_element_number')" />
+                                </div>
+                                <div class="form-group">
+                                  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                </div>
+                              </form>
+                              <h4 id="success-message2" style="display:none;">Element removed successfully! </h4> 
                             </div>
                           </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div id="success-message" style="display:none;">Success</div>
+                <br/>
+                <br/>
+                <br/>
+                <section class="tm-welcome">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="tm-section-header tm-header-floating">Current Elements</h2>         
+                        </div>
+                    </div>
+                    <style>
+                      table,
+                      th,
+                      td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        padding: 5px;
+                        text-align: center;
+                      }
+                    </style>
+                <br/>
+                <br/>
+                <br/>
+                <meta charset="UTF-8">
+                <title>Molecules</title>
+                </script>
+                <br/>
+                <table id="element-table">
+                  <thead>
+                    <tr>
+                      <th>ELEMENT_NO</th>
+                      <th>ELEMENT_CODE</th>
+                      <th>ELEMENT_NAME</th>
+                      <th>COLOUR1</th>
+                      <th>COLOUR2</th>
+                      <th>COLOUR3</th>
+                      <th>RADIUS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- This is where you will populate the table with data from the database -->
+                  </tbody>
+                </table>
+                <div id="svg-container"></div>
+             </section>
         <br/>
         <br/>
         <br/>
         <br/>
         <br/>
-
-            <footer>
-                Copyright &copy; 2020 New Vision 
-                
-                - Design: <a href="https://templatemo.com" rel="sponsored" target="_parent" title="css templates">TemplateMo</a>
-            </footer>
+        <footer>
+          Copyright &copy; 2023 Manu Konnur - All rights reserved.
+        </footer>
             
         </main>
     </div>

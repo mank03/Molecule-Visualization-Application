@@ -163,7 +163,8 @@ offsety = 500
 db = molsql.Database(reset = False)
 radius = db.radius()
 element_name = db.element_name()
-header += db.radial_gradients()
+# fill = element_name[self.c_atom.element]   
+# header += db.radial_gradients()
 
 class Atom:
     def __init__(self, c_atom):
@@ -173,8 +174,12 @@ class Atom:
     def svg(self):
         cx = (self.c_atom.x * 100.0) + offsetx
         cy = (self.c_atom.y * 100.0) + offsety
+        element_name = db.element_name()
+        radius = db.radius()
+        print(self.c_atom.element)
         r = radius[self.c_atom.element]
-        fill = element_name[self.c_atom.element]    
+        fill = element_name[self.c_atom.element]   
+        # header += db.radial_gradients() 
         var = (' <circle cx="%.2f" cy="%.2f" r="%d" fill="url(#%s)"/>\n' % (cx, cy, r, fill))
         return var
 
@@ -211,12 +216,14 @@ class Molecule(molecule.molecule):
 
     def svg(self):
         # Sort atoms and bonds by increasing z value
-        return_string = header
-
+        return_string = header + db.radial_gradients()
+        print("return_string")
+        print(return_string)
         atom_counter = self.atom_no
         bond_counter = self.bond_no
         count_atom = 0
         count_bond = 0
+
 
         while(count_atom != atom_counter):
             atoms = Atom(self.get_atom(count_atom))
@@ -241,7 +248,7 @@ class Molecule(molecule.molecule):
 
         return_string += footer
         return return_string
-   
+
 
     def parse(self, file):
         self.mol = molecule.molecule()
