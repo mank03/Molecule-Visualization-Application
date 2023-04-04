@@ -18,16 +18,39 @@ function checkInput(elementId)  {
   }
 }
 
-function checkNameInput(elementId)  {
+function checkNameInput(elementId) {
   var inputElement = document.getElementById(elementId);
-  if (!isNaN(inputElement.value)) {
-      alert("Please enter a valid name.");
-      inputElement.value = "";
+  var regex = /^[a-zA-Z ]+$/;
+  if (!regex.test(inputElement.value)) {
+    alert("Please enter a valid name without numbers or special characters.");
+    inputElement.value = "";
   }
 }
 
-// function showRemoveSuccess() {
-//   document.getElementById("remove-success").style.display = "block";
+function checkCodeInput(elementId) {
+  var inputElement = document.getElementById(elementId);
+  var inputValue = inputElement.value.trim();
+  if (inputValue.length > 3) {
+    alert("Element code cannot be more than 3 characters.");
+    inputElement.value = "";
+    return;
+  }
+  if (!/^[a-zA-Z]*$/.test(inputValue)) {
+    alert("Element code cannot contain numbers or special characters.");
+    inputElement.value = "";
+    return;
+  }
+}
+
+// function checkCodeInput(inputId) {
+//   var elementCode = document.getElementById(inputId).value;
+//   var elementCode2 = document.getElementById(elementId);
+
+//   if (elementCode.length > 3 || !isNaN(elementCode2.value)){
+//       alert("Element code must be 3 letters or less.");
+//       document.getElementById(inputId).value = "";
+
+//   }
 // }
 
 function toggleAddForm() {
@@ -110,7 +133,7 @@ $(document).ready(function(){
         },
         error: function(xhr, textStatus, errorThrown) {
           // $("#add-form").hide(); // Hide the form
-          alert("This element name, number, or code already exists! Please refer to the table below."); // Show an alert
+          alert("This element code already exists! Please refer to the table below."); // Show an alert
           console.log("Error adding element:", errorThrown);
         }
       });
@@ -118,21 +141,21 @@ $(document).ready(function(){
 
     $("#remove-form").submit(function(event) {
       event.preventDefault(); // Prevent form submission from refreshing the page
-      var elementNumber = $("#remove_element_number").val();
+      var elementCode = $("#remove_code").val();
       $.ajax({
         type: "POST",
         url: "/template/removeelement",
-        data: { element_number: elementNumber },
+        data: { element_code: elementCode },
         success: function(response) {
           // $("#remove-form").hide(); // Hide the form
-          document.getElementById('success-message2').textContent = `Successfully removed Element ${elementNumber}`;
+          document.getElementById('success-message2').textContent = `Successfully removed Element ${elementCode}`;
           $("#success-message2").show(); // Show the success message
           // alert("Element removed successfully"); // Show an alert
           console.log("Element removed successfully.");
         },
         error: function(xhr, textStatus, errorThrown) {
           // $("#remove-form").hide(); // Hide the form
-          alert("Element number does not exist! Please refer to the table below."); // Show an alert
+          alert("Element code does not exist! Please refer to the table below."); // Show an alert
           console.log("Error removing element:", errorThrown);
         }
       });
@@ -144,10 +167,16 @@ $(document).ready(function(){
     
       // Get the form data
       var formData = new FormData($(this)[0]);
-    
+      // var molName = $("#mol_name").val();
+      // var sdf = $("#sdf_file").val();
+
       $.ajax({
         url: "/template/molecule",
         type: "POST",
+        // data: { mol : molName,
+        //         file: sdf
+        // },
+
         data: formData,
         processData: false,
         contentType: false,

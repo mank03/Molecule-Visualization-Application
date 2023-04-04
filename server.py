@@ -51,8 +51,8 @@ class MyHandler( BaseHTTPRequestHandler ):
         '/template/img/water.png': ('image/png', 'template/img/water.png'),
         '/template/img/caffeine.png': ('image/png', 'template/img/caffeine.png'),
         '/template/img/cortisol.png': ('image/png', 'template/img/cortisol.png'),
-        '/template/img/creatine.png': ('image/png', 'template/img/creatine.png')
-
+        '/template/img/creatine.png': ('image/png', 'template/img/creatine.png'),
+        '/template/img/moleculeVid2.mp4': ('video/mp4', 'template/img/moleculeVid2.mp4')
     }
 
     def do_GET(self):
@@ -83,7 +83,7 @@ class MyHandler( BaseHTTPRequestHandler ):
                 num_bonds_query = f"SELECT COUNT(*) FROM MoleculeBond WHERE MOLECULE_ID={row[0]}"
                 num_bonds = cursor.execute(num_bonds_query).fetchone()[0]
                 # Generate the table row with the atom count
-                table_rows += f"<tr><td>{row[0]}</td><td><button onclick='showSvg(\"{row[1]}\"); document.getElementById(\"selected-element\").textContent = \"{row[1]}\"; document.getElementById(\"rotate-form\").style.display = \"block\";'>{row[1]}</button></td><td>{num_atoms}</td><td>{num_bonds}</td></tr>"
+                table_rows += f"<tr><td>{row[0]}</td><td><button type='button' class='btn tm-btn' onclick='showSvg(\"{row[1]}\"); document.getElementById(\"selected-element\").textContent = \"{row[1]}\"; document.getElementById(\"rotate-form\").style.display = \"block\";'>{row[1]}</button></td><td>{num_atoms}</td><td>{num_bonds}</td></tr>"
             with open("template/viewMolecules.html", "r") as f:
                 html = f.read()
             html = html.replace("<!-- This is where you will populate the table with data from the database -->", table_rows)
@@ -203,6 +203,7 @@ class MyHandler( BaseHTTPRequestHandler ):
             db = molsql.Database(reset=False)
             mol = db.load_mol( element_name )
             mol.sort()
+
             mol.rotateX(float(x))
             mol.rotateY(float(y))
             mol.rotateZ(float(z))
@@ -244,7 +245,7 @@ class MyHandler( BaseHTTPRequestHandler ):
             cursor.execute("SELECT * FROM Elements WHERE ELEMENT_CODE = ?", (element_code,))
             code_exists = cursor.fetchone()
 
-            if number_exists or name_exists or code_exists:
+            if code_exists:
                  # If element_number already exist, send error response
                 db.conn.close()
                 print(f"Element with number {element_number} already exists .")
@@ -254,7 +255,7 @@ class MyHandler( BaseHTTPRequestHandler ):
                 error_message = "<html><body><h1>Error!</h1><a href='/template/modifyElements.html'>Back</a></body></html>" 
                 self.wfile.write(error_message.encode())
             else:
-                db['Elements'] = ( element_number, element_code, element_name, color1, color2, color3, radius ) #may need to remove the hastag from colour vars 
+                db['Elements'] = ( element_number, element_code, element_name, color1, color2, color3, radius ) 
                 db.conn.commit()
                 db.conn.close()
                 self.send_response(200)
@@ -272,21 +273,22 @@ class MyHandler( BaseHTTPRequestHandler ):
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             data = parse_qs(body.decode())
-            element_number = data['element_number'][0]
+            element_code = data['element_code'][0]
 
             db = molsql.Database(reset=False)
             db.create_tables(); 
             cursor = db.conn.cursor()
 
             # Deleting single record now
-            cursor.execute("SELECT * FROM Elements WHERE ELEMENT_NO = ?", (element_number,))
+            cursor.execute("SELECT * FROM Elements WHERE ELEMENT_CODE = ?", (element_code,))
             result = cursor.fetchone()
+            print("result = ", result)
             if result:
                 # If element_number exists, delete the record and send success response
-                cursor.execute(f'''DELETE FROM Elements WHERE ELEMENT_NO = {element_number}''')
+                cursor.execute("DELETE FROM Elements WHERE ELEMENT_CODE = ?", (element_code,))
                 db.conn.commit()
                 db.conn.close()
-                print(f"Element with number {element_number} deleted successfully.")
+                print(f"Element with code {element_code} deleted successfully.")
                 self.send_response(200)
                 self.send_header("Content-type", "text/html")
                 self.end_headers()
@@ -302,28 +304,46 @@ class MyHandler( BaseHTTPRequestHandler ):
                 error_message = "<html><body><h1>Error!</h1><a href='/template/modifyElements.html'>Back</a></body></html>" 
                 self.wfile.write(error_message.encode())
         elif self.path == "/template/molecule":
-            content_length = int(self.headers['Content-Length'])
-            body = self.rfile.read(content_length)
-            fp = body.decode()
-            split_string = fp.split('\n')
-            new_string = '\n'.join(split_string[4:])
+            content_type, pdict = cgi.parse_header(self.headers['Content-Type'])
+            if content_type == 'multipart/form-data':
+                # Get the field values from the form data
+                form = cgi.FieldStorage(
+                    fp=self.rfile,
+                    headers=self.headers,
+                    environ={'REQUEST_METHOD': 'POST'}
+                )
+            sdf_file = form['filename'].file.read()
+            print("sdf_file", sdf_file)
+            fp = sdf_file.decode()
+            print("fp = ", fp)
+            mol_name = form['mol_name'].value
+            print(mol_name)
+
 
             db = molsql.Database(reset=False)
             db.create_tables(); 
-            # db.element_name()
-            # create a cursor object
             cursor = db.conn.cursor()
 
-            # execute the SELECT statement
             cursor.execute("SELECT ELEMENT_CODE FROM Elements")
-
-            # fetch all the results
             results = cursor.fetchall()
 
             print("element_code from elements table:")
             # print the element names
             for result in results:
                 print(result[0])
+
+            cursor.execute("SELECT * FROM Molecules WHERE NAME=?", (mol_name,))
+            name = cursor.fetchone()
+            print("name = ", name)
+
+            if name:
+                self.send_response(404)
+                self.send_header("Content-type", "text/plain")
+                self.end_headers()
+                db.conn.commit()
+                return
+
+
 
             # # close the cursor and database connections
             # cursor.close()
@@ -334,12 +354,12 @@ class MyHandler( BaseHTTPRequestHandler ):
             # db['Elements'] = ( 7, 'N', 'Nitrogen', '0000FF', '000005', '000002', 40 ) 
             # db['Elements'] = ( 8, 'O', 'Oxygen',   'FF0000', '050000', '020000', 40 )
             
-            filename_pattern = r'filename="([\w\s]+)\.\w+"'
-            filename_match = re.search(filename_pattern, str(split_string))
-            # filename = ""
-            if filename_match:
-                filename = filename_match.group(1)
-                print(filename)
+            # filename_pattern = r'filename="([\w\s]+)\.\w+"'
+            # filename_match = re.search(filename_pattern, str(split_string))
+            # # filename = ""
+            # if filename_match:
+            #     filename = filename_match.group(1)
+            #     print(filename)
             # mol = MolDisplay.Molecule()
             # mol.parse(StringIO(new_string))
             # mol.sort()
@@ -360,23 +380,24 @@ class MyHandler( BaseHTTPRequestHandler ):
             # self.end_headers()
             # self.wfile.write(svg_string.encode())
 
+
             try:
-                db.add_molecule(filename, StringIO(new_string))
-                mol = db.load_mol( filename )
+                db.add_molecule(mol_name, StringIO(fp))
+                mol = db.load_mol( mol_name )
                 mol.sort()
                 svg_string = mol.svg()
                 self.send_response(200)
                 self.send_header("Content-type", "text/plain")
                 self.end_headers()
-            except (AttributeError, IOError, KeyError, ValueError) as e:
+            except (AttributeError, IOError, KeyError, IndexError, ValueError) as e:
                 print("error:", e)
                 self.send_response(404)
                 self.send_header("Content-type", "text/plain")
                 self.end_headers()
-                db.delete_molecule(filename)
+                db.delete_molecule(mol_name)
                 # cursor.execute("DELETE FROM Molecules WHERE MOLECULE_ID = (SELECT MAX(MOLECULE_ID) FROM Molecules)")
                 db.conn.commit()
-                # return
+                return
 
             # db.helper(filename)
 

@@ -21,7 +21,7 @@ ul, h1, h2, h3, h4, p, figure {
 }
 
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   background-color: #223255;
   overflow-x: hidden;
@@ -42,6 +42,11 @@ h1, h2, h3 {
 
 h4{
     color: #ffffff;
+    font-weight: 200;
+}
+
+h5{
+    color: #373f4f;
     font-weight: 200;
 }
 
@@ -118,6 +123,73 @@ p {
 
 .tm-services-bg { background-image: url(../img/molpic4.jpg); }
 .tm-contact-bg { background-image: url(../img/molpic5.jpg); }
+
+#element-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #element-table th,
+  #element-table td {
+    text-align: left;
+    padding: 8px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #element-table th {
+    background-color: #a5c3ce;
+    color: #373f4f;
+  }
+
+  #element-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  #element-table tbody tr:hover {
+    background-color: #ddd;
+  }
+
+  #element-table button {
+    background-color: #4285f4;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #element-table button:hover {
+    background-color: #3b7dd8;
+  }
+
+
+  #MoleculeTable {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #MoleculeTable td, #MoleculeTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #MoleculeTable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #MoleculeTable tr:hover {background-color: #ddd;}
+  
+  #MoleculeTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #a8c4cc;
+    color: #373f4f;
+  }
 
 @media (max-width: 992px) {
     .tm-contact-bg { background-position: 80% top; }
