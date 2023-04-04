@@ -1,0 +1,54 @@
+<svg version="1.1" width="1000" height="1000" 
+                    xmlns="http://www.w3.org/2000/svg">
+            <radialGradient id="Hydrogen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#006d8f"/>
+            <stop offset="50%" stop-color="#0056d6"/>
+            <stop offset="100%" stop-color="#53d5fd"/>
+            </radialGradient>
+            <radialGradient id="Oxygen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#caf0fe"/>
+            <stop offset="50%" stop-color="#e0edd4"/>
+            <stop offset="100%" stop-color="#c0c0c0"/>
+            </radialGradient>
+            <radialGradient id="Carbon" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#232323"/>
+            <stop offset="50%" stop-color="#929292"/>
+            <stop offset="100%" stop-color="#d6d6d6"/>
+            </radialGradient>
+            <radialGradient id="Nitrogen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#b1dd8c"/>
+            <stop offset="50%" stop-color="#96d35f"/>
+            <stop offset="100%" stop-color="#ebf38f"/>
+            </radialGradient>
+            <radialGradient id="Boron" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#7c2a00"/>
+            <stop offset="50%" stop-color="#5c0700"/>
+            <stop offset="100%" stop-color="#785700"/>
+            </radialGradient> <polygon points="510.00,500.00 490.00,500.00 490.00,582.50 510.00,582.50" fill="green"/>
+ <polygon points="500.00,490.00 500.00,510.00 582.50,510.00 582.50,490.00" fill="green"/>
+ <polygon points="500.00,510.00 500.00,490.00 417.50,490.00 417.50,510.00" fill="green"/>
+ <polygon points="490.00,500.00 510.00,500.00 510.00,417.50 490.00,417.50" fill="green"/>
+ <polygon points="510.00,500.00 490.00,500.00 490.00,582.50 510.00,582.50" fill="green"/>
+ <polygon points="500.00,490.00 500.00,510.00 582.50,510.00 582.50,490.00" fill="green"/>
+ <polygon points="500.00,510.00 500.00,490.00 417.50,490.00 417.50,510.00" fill="green"/>
+ <polygon points="490.00,500.00 510.00,500.00 510.00,417.50 490.00,417.50" fill="green"/>
+ <polygon points="510.00,500.00 490.00,500.00 490.00,582.50 510.00,582.50" fill="green"/>
+ <polygon points="500.00,490.00 500.00,510.00 582.50,510.00 582.50,490.00" fill="green"/>
+ <polygon points="500.00,510.00 500.00,490.00 417.50,490.00 417.50,510.00" fill="green"/>
+ <polygon points="490.00,500.00 510.00,500.00 510.00,417.50 490.00,417.50" fill="green"/>
+ <circle cx="500.00" cy="582.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="582.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="417.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.00" cy="500.00" r="25" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="417.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.00" cy="582.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="582.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="417.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.00" cy="500.00" r="25" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="417.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.00" cy="582.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="582.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="417.50" cy="500.00" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.00" cy="500.00" r="25" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="417.50" r="40" fill="url(#Hydrogen)"/>
+</svg>

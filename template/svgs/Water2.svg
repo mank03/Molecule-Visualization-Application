@@ -1,0 +1,17 @@
+<svg version="1.1" width="1000" height="1000" 
+                    xmlns="http://www.w3.org/2000/svg">
+            <radialGradient id="Hydrogen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#008cb4"/>
+            <stop offset="50%" stop-color="#0056d6"/>
+            <stop offset="100%" stop-color="#00c7fc"/>
+            </radialGradient>
+            <radialGradient id="Oxygen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#b18cfe"/>
+            <stop offset="50%" stop-color="#ffd9a8"/>
+            <stop offset="100%" stop-color="#cce8b5"/>
+            </radialGradient> <circle cx="586.69" cy="636.81" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="500.21" cy="499.59" r="40" fill="url(#Hydrogen)"/>
+ <polygon points="503.09,587.20 494.71,605.36 582.50,645.89 590.88,627.73" fill="green"/>
+ <polygon points="510.21,499.73 490.21,499.45 488.90,596.14 508.90,596.42" fill="green"/>
+ <circle cx="498.90" cy="596.28" r="30" fill="url(#Oxygen)"/>
+</svg>
