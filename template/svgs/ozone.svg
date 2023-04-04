@@ -1,7 +1,0 @@
-<svg version="1.1" width="1000" height="1000" 
-                    xmlns="http://www.w3.org/2000/svg"> <polygon points="433.55,477.59 423.55,494.91 495.00,536.16 505.00,518.84" fill="green"/>
- <polygon points="576.45,494.91 566.45,477.59 495.00,518.84 505.00,536.16" fill="green"/>
- <circle cx="500.00" cy="527.50" r="30" fill="url(#Oxygen)"/>
- <circle cx="428.55" cy="486.25" r="30" fill="url(#Oxygen)"/>
- <circle cx="571.45" cy="486.25" r="30" fill="url(#Oxygen)"/>
-</svg>

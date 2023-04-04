@@ -182,12 +182,12 @@ $(document).ready(function(){
         contentType: false,
         success: function(response) {
           // Hide the form
-          $("#upload-form").hide();
+          // $("#upload-form").hide();
           // Show the success message
           $("#success-message").show();
         },
         error: function(xhr, status, error){
-          alert("Error uploading file. Ensure SDF file is valid and required elements are uploaded."); // Show an alert
+          alert("Error uploading file. Ensure molecule name is unqiue, SDF file is valid and required elements are uploaded."); // Show an alert
           console.log(xhr.responseText);
         }
       });
