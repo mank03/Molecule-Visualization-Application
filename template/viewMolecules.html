@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>View Molecules</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet" /> <!-- https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans -->
+    <link href="css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" /> <!-- https://getbootstrap.com -->
+	<link href="css/templatemo-new-vision.css" rel="stylesheet" />
+<!--
+
+New Vision Template
+
+https://templatemo.com/tm-542-new-vision
+
+-->
+</head>
+<body>
+    <!-- Page Header -->
+    <div class="container-fluid">
+        <div class="tm-site-header">
+            <div class="row">
+                <div class="col-12 tm-site-header-col">
+                    <div class="tm-site-header-left">
+                        <img src="/template/img/203183.png" alt="Molecule Image" class="tm-site-icon">
+                        <h1 class="tm-site-name">Molecule<br/>Explorer</h1>
+                    </div>
+                    <div class="tm-site-header-right tm-menu-container-outer">
+
+                        <!--Navbar-->
+                        <nav class="navbar navbar-expand-lg">
+                        
+                          <!-- Collapse button -->
+                          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+                            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+                                class="fas fa-bars fa-1x"></i></span></button>
+                        
+                          <!-- Collapsible content -->
+                          <div class="collapse navbar-collapse tm-nav" id="navbarSupportedContent1">
+                        
+                            <!-- Links -->
+                            <ul class="navbar-nav mr-auto">
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="modifyElements.html">Modify Elements</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link tm-nav-link" href="uploadSDF.html">Upload SDF</a>
+                              </li>
+                              <li class="nav-item active">
+                                <a class="nav-link tm-nav-link" href="#">View Molecules</a>
+                              </li>
+                            </ul>
+                            <!-- Links -->
+                        
+                          </div>
+                          <!-- Collapsible content -->
+                        
+                        </nav>
+                        <!--/.Navbar-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="tm-main-bg tm-contact-bg"></div>        
+            </div>
+        </div>
+        
+        <!-- Main -->
+        <main>
+            <!-- Welcome section -->
+            <section class="tm-welcome">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-section-header tm-header-floating">View Molecules</h2>         
+                    </div>
+                </div>
+                <style>
+                  table {
+                      border-collapse: collapse;
+                      margin: auto;
+                  }
+                  
+                  th, td {
+                      padding: 10px;
+                      border: 1px solid rgb(0, 81, 105);
+                      text-align: center;
+                      font-family: Arial, sans-serif;
+                  }
+                  
+                  th {
+                      background-color: #a5c3cd;
+                  }
+                  
+              </style>
+              <br/>
+              <br/>
+              
+            <br/>
+            <br/>
+            <br/>
+            <meta charset="UTF-8">
+            <title>Molecules</title>
+            <script type="text/javascript">
+              function showSvg(moleculeName) {
+                var svgContainer = document.getElementById("svg-container");
+                svgContainer.innerHTML = "<img src='" + moleculeName + ".svg' />";
+                document.getElementById("selected-element").value = moleculeName;
+              }
+
+            </script>
+            <br/>
+            <br/>
+            <br/>
+            
+            <table id="MoleculeTable">
+              <thead>
+                <tr>
+                  <th>MOLECULE_NO</th>
+                  <th>MOLECULE_NAME</th>
+                  <th>ATOM_NO</th>
+                  <th>BOND_NO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- This is where you will populate the table with data from the database -->
+              </tbody>
+            </table>
+            <div id="svg-container"></div>
+            <h1 id="selected-element"></h1>
+          <div id="success-message" style="display:none">Success</div>
+          <form id="rotate-form" style="display:none" action="/template/rotate" method="POST">
+            <input type="hidden" id="selected-element" name="element_name">
+            <!-- Add a hidden input field for the selected element name -->
+            <label for="x-coordinate">X Rotate:</label>
+            <input type="number" id="x-coordinate" name="x" value="0" required>
+          
+            <label for="y-coordinate">Y Rotate:</label>
+            <input type="number" id="y-coordinate" name="y" value="0" required>
+          
+            <label for="z-coordinate">Z Rotate:</label>
+            <input type="number" id="z-coordinate" name="z" value="0" required>
+            <button type="submit" id="rotate-button" name="submit-button">Rotate</button>
+          </form>
+
+          <script>
+            // const form = document.getElementById("rotate-form");
+            // const xInput = document.getElementById("x-coordinate");
+            // const rotateButton = document.getElementById("rotate-button");
+
+            // let x = 0;
+            // let intervalId;
+
+            // function rotateX() {
+            //   x += 1;
+            //   if (x > 360) {
+            //     clearInterval(intervalId); // Stop the interval when x exceeds 360
+            //     return;
+            //   }
+
+            //   // Set the value of the x-coordinate input
+            //   xInput.value = x;
+
+            //   // Simulate a click event on the submit button
+            //   rotateButton.click();
+            // }
+
+            // rotateButton.addEventListener("click", function() {
+            //   clearInterval(intervalId); // Stop any running intervals
+            //   intervalId = setInterval(rotateX, 100); // Repeat the rotateX function every 10 milliseconds
+            //});
+          </script>
+        </section>
+          <footer>
+            Copyright &copy; 2023 Manu Konnur - All rights reserved.
+         </footer>
+            
+        </main>
+    </div>
+    <script>
+      function showSvg(moleculeName) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+            // When the response is received, set the SVG data as the innerHTML of the svg-container element
+            document.getElementById("svg-container").innerHTML = this.responseText;
+            document.getElementById("selected-element").value = moleculeName;
+          }
+        };
+        xhr.open("GET", "/getMoleculeSVG/" + encodeURIComponent(moleculeName), true);
+        xhr.send();
+      }
+
+      </script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+</body>
+</html>
