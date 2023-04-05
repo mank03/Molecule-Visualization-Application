@@ -1,0 +1,83 @@
+<svg version="1.1" width="1000" height="1000" 
+                    xmlns="http://www.w3.org/2000/svg">
+            <radialGradient id="Hydrogen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#0056d6"/>
+            <stop offset="50%" stop-color="#006d8f"/>
+            <stop offset="100%" stop-color="#53d5fd"/>
+            </radialGradient>
+            <radialGradient id="Oxygen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#ffd9a8"/>
+            <stop offset="50%" stop-color="#74a7fe"/>
+            <stop offset="100%" stop-color="#cce8b5"/>
+            </radialGradient>
+            <radialGradient id="Carbon" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#d6d6d6"/>
+            <stop offset="50%" stop-color="#929292"/>
+            <stop offset="100%" stop-color="#606060"/>
+            </radialGradient>
+            <radialGradient id="Nitrogen" cx="-50%" cy="-50%" r="220%" fx="20%" fy="20%">
+            <stop offset="0%" stop-color="#ffa57d"/>
+            <stop offset="50%" stop-color="#fff995"/>
+            <stop offset="100%" stop-color="#b1dd8c"/>
+            </radialGradient> <polygon points="561.46,458.75 581.46,458.75 581.46,376.25 561.46,376.25" fill="green"/>
+ <polygon points="576.46,467.41 566.46,450.09 495.00,491.34 505.00,508.66" fill="green"/>
+ <polygon points="576.46,450.09 566.46,467.41 637.90,508.66 647.90,491.34" fill="green"/>
+ <polygon points="566.46,384.91 576.46,367.59 505.00,326.35 495.00,343.67" fill="green"/>
+ <polygon points="505.00,343.67 495.00,326.35 423.56,367.59 433.56,384.91" fill="green"/>
+ <polygon points="423.56,384.91 433.56,367.59 362.11,326.35 352.11,343.67" fill="green"/>
+ <polygon points="438.56,376.25 418.56,376.25 418.56,458.75 438.56,458.75" fill="green"/>
+ <polygon points="362.11,343.67 352.11,326.35 280.66,367.59 290.66,384.91" fill="green"/>
+ <polygon points="295.66,376.25 275.66,376.25 275.66,458.75 295.66,458.75" fill="green"/>
+ <polygon points="290.66,450.09 280.66,467.41 352.11,508.66 362.11,491.34" fill="green"/>
+ <polygon points="352.11,491.34 362.11,508.66 433.56,467.41 423.56,450.09" fill="green"/>
+ <polygon points="433.56,450.09 423.56,467.41 495.00,508.66 505.00,491.34" fill="green"/>
+ <polygon points="510.00,500.00 490.00,500.00 490.00,582.50 510.00,582.50" fill="green"/>
+ <polygon points="505.00,573.84 495.00,591.16 566.46,632.41 576.46,615.09" fill="green"/>
+ <polygon points="566.46,615.09 576.46,632.41 647.90,591.16 637.90,573.84" fill="green"/>
+ <polygon points="645.99,572.99 639.81,592.01 718.28,617.51 724.46,598.49" fill="green"/>
+ <polygon points="632.90,582.50 652.90,582.50 652.90,500.00 632.90,500.00" fill="green"/>
+ <polygon points="713.28,602.12 729.46,613.88 777.95,547.13 761.77,535.37" fill="green"/>
+ <polygon points="761.77,547.13 777.95,535.37 729.46,468.63 713.28,480.39" fill="green"/>
+ <polygon points="724.46,484.02 718.28,465.00 639.81,490.49 645.99,509.51" fill="green"/>
+ <polygon points="490.00,500.00 510.00,500.00 510.00,417.50 490.00,417.50" fill="green"/>
+ <polygon points="632.90,500.00 652.90,500.00 652.90,417.50 632.90,417.50" fill="green"/>
+ <polygon points="581.46,458.75 561.46,458.75 561.46,541.25 581.46,541.25" fill="green"/>
+ <polygon points="726.37,599.34 716.37,616.66 787.82,657.91 797.82,640.59" fill="green"/>
+ <polygon points="731.37,608.00 711.37,608.00 711.37,690.50 731.37,690.50" fill="green"/>
+ <polygon points="726.37,681.84 716.37,699.16 787.82,740.41 797.82,723.09" fill="green"/>
+ <polygon points="280.66,384.91 290.66,367.59 219.21,326.34 209.21,343.66" fill="green"/>
+ <polygon points="505.00,591.16 495.00,573.84 423.55,615.09 433.55,632.41" fill="green"/>
+ <polygon points="726.37,699.16 716.37,681.84 644.92,723.09 654.92,740.41" fill="green"/>
+ <polygon points="787.82,723.09 797.82,740.41 869.27,699.16 859.27,681.84" fill="green"/>
+ <polygon points="652.90,582.50 632.90,582.50 632.90,665.00 652.90,665.00" fill="green"/>
+ <polygon points="438.56,458.75 418.56,458.75 418.56,541.25 438.56,541.25" fill="green"/>
+ <circle cx="571.46" cy="376.25" r="30" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="335.01" r="30" fill="url(#Carbon)"/>
+ <circle cx="428.56" cy="376.25" r="30" fill="url(#Carbon)"/>
+ <circle cx="357.11" cy="335.01" r="30" fill="url(#Carbon)"/>
+ <circle cx="285.66" cy="458.75" r="30" fill="url(#Carbon)"/>
+ <circle cx="357.11" cy="500.00" r="30" fill="url(#Carbon)"/>
+ <circle cx="571.46" cy="623.75" r="30" fill="url(#Carbon)"/>
+ <circle cx="769.86" cy="541.25" r="30" fill="url(#Carbon)"/>
+ <circle cx="721.37" cy="474.51" r="30" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="500.00" r="30" fill="url(#Carbon)"/>
+ <circle cx="500.00" cy="417.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="642.90" cy="500.00" r="30" fill="url(#Carbon)"/>
+ <circle cx="642.90" cy="417.50" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="571.46" cy="458.75" r="30" fill="url(#Carbon)"/>
+ <circle cx="571.46" cy="541.25" r="40" fill="url(#Hydrogen)"/>
+ <circle cx="642.90" cy="582.50" r="30" fill="url(#Carbon)"/>
+ <circle cx="721.37" cy="608.00" r="30" fill="url(#Carbon)"/>
+ <circle cx="285.66" cy="376.25" r="30" fill="url(#Carbon)"/>
+ <circle cx="214.21" cy="335.00" r="35" fill="url(#Oxygen)"/>
+ <circle cx="500.00" cy="582.50" r="30" fill="url(#Carbon)"/>
+ <circle cx="428.55" cy="623.75" r="35" fill="url(#Oxygen)"/>
+ <circle cx="721.37" cy="690.50" r="30" fill="url(#Carbon)"/>
+ <circle cx="649.92" cy="731.75" r="35" fill="url(#Oxygen)"/>
+ <circle cx="792.82" cy="731.75" r="30" fill="url(#Carbon)"/>
+ <circle cx="864.27" cy="690.50" r="35" fill="url(#Oxygen)"/>
+ <circle cx="792.82" cy="649.25" r="35" fill="url(#Oxygen)"/>
+ <circle cx="642.90" cy="665.00" r="30" fill="url(#Carbon)"/>
+ <circle cx="428.56" cy="458.75" r="30" fill="url(#Carbon)"/>
+ <circle cx="428.56" cy="541.25" r="30" fill="url(#Carbon)"/>
+</svg>
