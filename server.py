@@ -17,12 +17,9 @@ class MyHandler( BaseHTTPRequestHandler ):
         '/styles.css': ('text/css', 'styles.css'),
         '/elementForm.html': ('text/html', 'elementForm.html'),
         '/uploadSdf.html': ('text/html', 'uploadSdf.html'),
-        
         '/template/about.html': ('text/html', 'template/about.html'),
         '/template/home.html': ('text/html', 'template/home.html'),
-        # '/template/modifyElements.html': ('text/html', 'template/modifyElements.html'),
         '/template/uploadSDF.html': ('text/html', 'template/uploadSDF.html'),
-        # '/template/viewMolecules.html': ('text/html', 'template/viewMolecules.html'),
 
         '/template/css/all.min.css': ('text/css', 'template/css/all.min.css'),
         '/template/css/bootstrap.min.css': ('text/css', 'template/css/bootstrap.min.css'),
@@ -71,12 +68,6 @@ class MyHandler( BaseHTTPRequestHandler ):
             # Generate the HTML table with the data
             table_rows = ""
             for row in rows:
-                print(row[0])
-                print(row[1])
-                # molID = cursor.execute("""SELECT MOLECULE_ID FROM Molecules WHERE NAME = ?""", (row[1],))
-                # print(molID)
-                # data = cursor2.fetchall()
-                # print(data)
                 # Get the number of atoms in the molecule
                 num_atoms_query = f"SELECT COUNT(*) FROM MoleculeAtom WHERE MOLECULE_ID={row[0]}"
                 num_atoms = cursor.execute(num_atoms_query).fetchone()[0]
@@ -102,7 +93,6 @@ class MyHandler( BaseHTTPRequestHandler ):
             mol.sort()
             fp = open( "template/svgs/" + svg_name + ".svg", "w" );
             string = mol.svg()
-            print(string)
             fp.write( mol.svg());
             # Send the SVG data back to the client
             self.send_response(200)
@@ -113,19 +103,9 @@ class MyHandler( BaseHTTPRequestHandler ):
             # self.wfile.write(string.encode())
             fp.close();
         elif self.path.startswith("/getMoleculeRotatedSVG"):
-            print("HERE1")
             # Get the name of the molecule from the request URL
             svg_name = self.path.split("/")[-1]
-            print(svg_name)
-            # Get the SVG data from the database
-            # db = molsql.Database(reset=False)
-            # mol = db.load_mol( svg_name )
-            # mol.sort()
-            # fp = open( "template/svgs/temp.svg", "w" );
-            # string = mol.svg()
-            # print(string)
-            # fp.write( mol.svg());
-            # Send the SVG data back to the client
+
             fp = open("template/svgs/" + svg_name +"_rotated.svg", "r")
             content = fp.read()
             fp.close()
@@ -135,10 +115,8 @@ class MyHandler( BaseHTTPRequestHandler ):
             self.end_headers()
             self.wfile.write(bytes(content, "utf-8"))
 
-            # self.wfile.write(string.encode())
             fp.close();
         elif self.path == "/template/modifyElements.html":
-            print("HEELLOOO")
             # Connect to the database
             db = molsql.Database(reset=False)
             db.create_tables()
@@ -182,23 +160,15 @@ class MyHandler( BaseHTTPRequestHandler ):
 
     def do_POST(self):
         if self.path == "/template/rotate":
-            print("HERE2")
 
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             data = parse_qs(body.decode())
-            print(data)
 
             x = data['xVal'][0]
             y = data['yVal'][0]
             z = data['zVal'][0]
             element_name = data['element'][0]
-
-            # Print the values for testing
-            print("Element Name: ", element_name)
-            print("X: ", x)
-            print("Y: ", y)
-            print("Z: ", z)
 
             db = molsql.Database(reset=False)
             mol = db.load_mol( element_name )
@@ -222,8 +192,6 @@ class MyHandler( BaseHTTPRequestHandler ):
         if self.path == "/template/addelement":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
-            print("body")
-            print(body)
             data = parse_qs(body.decode())
             
             element_number = data['element_number'][0]
@@ -263,12 +231,6 @@ class MyHandler( BaseHTTPRequestHandler ):
                 self.end_headers()
                 success_message = "<html><body><h1>Success!</h1><a href='/template/modifyElements.html'>Back</a></body></html>" 
                 self.wfile.write(success_message.encode())
-            # # Send a response back to the client
-            # self.send_response(200)
-            # self.send_header("Content-type", "text/plain")
-            # self.end_headers()
-            # self.wfile.write(bytes("<h3>Success</h3>", "utf-8"))
-
         elif self.path == "/template/removeelement":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
@@ -282,7 +244,6 @@ class MyHandler( BaseHTTPRequestHandler ):
             # Deleting single record now
             cursor.execute("SELECT * FROM Elements WHERE ELEMENT_CODE = ?", (element_code,))
             result = cursor.fetchone()
-            print("result = ", result)
             if result:
                 # If element_number exists, delete the record and send success response
                 cursor.execute("DELETE FROM Elements WHERE ELEMENT_CODE = ?", (element_code,))
@@ -313,11 +274,8 @@ class MyHandler( BaseHTTPRequestHandler ):
                     environ={'REQUEST_METHOD': 'POST'}
                 )
             sdf_file = form['filename'].file.read()
-            print("sdf_file", sdf_file)
             fp = sdf_file.decode()
-            print("fp = ", fp)
             mol_name = form['mol_name'].value
-            print(mol_name)
 
 
             db = molsql.Database(reset=False)
@@ -327,14 +285,8 @@ class MyHandler( BaseHTTPRequestHandler ):
             cursor.execute("SELECT ELEMENT_CODE FROM Elements")
             results = cursor.fetchall()
 
-            print("element_code from elements table:")
-            # print the element names
-            for result in results:
-                print(result[0])
-
             cursor.execute("SELECT * FROM Molecules WHERE NAME=?", (mol_name,))
             name = cursor.fetchone()
-            print("name = ", name)
 
             if name:
                 self.send_response(404)
@@ -342,43 +294,6 @@ class MyHandler( BaseHTTPRequestHandler ):
                 self.end_headers()
                 db.conn.commit()
                 return
-
-
-
-            # # close the cursor and database connections
-            # cursor.close()
-
-            #remove this before submitting
-            # db['Elements'] = ( 1, 'H', 'Hydrogen', 'FFFFFF', '050505', '020202', 25 ) 
-            # db['Elements'] = ( 6, 'C', 'Carbon',   '808080', '010101', '000000', 40 ) 
-            # db['Elements'] = ( 7, 'N', 'Nitrogen', '0000FF', '000005', '000002', 40 ) 
-            # db['Elements'] = ( 8, 'O', 'Oxygen',   'FF0000', '050000', '020000', 40 )
-            
-            # filename_pattern = r'filename="([\w\s]+)\.\w+"'
-            # filename_match = re.search(filename_pattern, str(split_string))
-            # # filename = ""
-            # if filename_match:
-            #     filename = filename_match.group(1)
-            #     print(filename)
-            # mol = MolDisplay.Molecule()
-            # mol.parse(StringIO(new_string))
-            # mol.sort()
-            # svg_string = mol.svg()
-            # self.wfile.write(svg_string.encode())
-            # fp=open("mol_files/water.sdf")
-
-            # cursor.execute('''SELECT NAME from Molecules WHERE NAME=?''', (filename,))
-            # exists = cursor.fetchall() 
-            # if not exists:
-            # db.helper(filename)
-            # db.add_molecule(filename, StringIO(new_string))
-            # mol = db.load_mol( filename )
-            # mol.sort()
-            # svg_string = mol.svg()
-            # self.send_response(200)
-            # self.send_header("Content-type", "text/plain")
-            # self.end_headers()
-            # self.wfile.write(svg_string.encode())
 
 
             try:
@@ -395,34 +310,13 @@ class MyHandler( BaseHTTPRequestHandler ):
                 self.send_header("Content-type", "text/plain")
                 self.end_headers()
                 db.delete_molecule(mol_name)
-                # cursor.execute("DELETE FROM Molecules WHERE MOLECULE_ID = (SELECT MAX(MOLECULE_ID) FROM Molecules)")
                 db.conn.commit()
                 return
-
-            # db.helper(filename)
-
-            # mol = db.load_mol( filename )
-            # mol.sort()
-            # svg_string = mol.svg()
-            # self.send_response(200)
-            # self.send_header("Content-type", "text/plain")
-            # self.end_headers()
-
-
-            # else:
-            #     self.send_response(404)
-            #     self.send_header("Content-type", "text/plain")
-            #     self.end_headers()
             self.wfile.write(bytes("uploaded successfully", "utf-8"))
-            # self.wfile.write(svg_string.encode())
         elif self.path == "template/viewMolecules":
-            print("HELLO")
             db = molsql.Database(reset=False)
             db.create_tables(); 
-            cursor = conn.execute('PRAGMA table_info(Molecules)')
-            for row in cursor.fetchall():
-                print(row)
-
+            cursor = conn.execute('PRAGMA table_info(Molecules)')                
         else:
             self.send_error(404, "File not founddd")
 

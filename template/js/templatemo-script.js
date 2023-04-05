@@ -42,16 +42,6 @@ function checkCodeInput(elementId) {
   }
 }
 
-// function checkCodeInput(inputId) {
-//   var elementCode = document.getElementById(inputId).value;
-//   var elementCode2 = document.getElementById(elementId);
-
-//   if (elementCode.length > 3 || !isNaN(elementCode2.value)){
-//       alert("Element code must be 3 letters or less.");
-//       document.getElementById(inputId).value = "";
-
-//   }
-// }
 
 function toggleAddForm() {
   var addForm = document.getElementById("add-form");
@@ -167,15 +157,10 @@ $(document).ready(function(){
     
       // Get the form data
       var formData = new FormData($(this)[0]);
-      // var molName = $("#mol_name").val();
-      // var sdf = $("#sdf_file").val();
 
       $.ajax({
         url: "/template/molecule",
         type: "POST",
-        // data: { mol : molName,
-        //         file: sdf
-        // },
 
         data: formData,
         processData: false,
@@ -213,10 +198,6 @@ $(document).ready(function(){
         },
         success: function(response) {
           showRotatedSvg(selectedElement);
-          // Hide the form
-          // $("form").hide();
-          // Show the success message
-          // $("#success-message").show();
         },
         error: function(xhr, status, error) {
           // Handle errors here

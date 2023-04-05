@@ -259,7 +259,7 @@ nav > ul > li { list-style: none; }
         border-bottom: none;
     }
 }
-
+/* obtained the following code from W3schools.com */
 .tm-mobile-menu { display: none; }
 
 .tm-mobile-menu.active.focus, 
